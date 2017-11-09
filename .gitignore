@@ -60,3 +60,6 @@ typings/
 # SASS
 .sass-cache
 .sass-cache/
+
+# Source Devlopment
+index.html

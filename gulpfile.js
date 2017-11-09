@@ -13,10 +13,10 @@ const gulp = require('gulp'),
 
 // // Compass task
 gulp.task('myCSS', function() {
-	return gulp.src(['src/*.scss'])
+	return gulp.src(['sass/*.scss'])
 		.pipe(compass({
-		 	css: 'src/',
-			sass: 'src/',
+		 	css: '',
+			sass: 'sass/',
 			config_file: './config.rb',
 		}))
 		.on('error', function(error) {
@@ -27,17 +27,17 @@ gulp.task('myCSS', function() {
 	      return "file created : " + filepath;
 	    }))
 		.pipe(autoprefixer('last 2 version', 'safari 5', 'ie 7', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-    	.pipe(gulp.dest('src/'))
+    	.pipe(gulp.dest(''))
     	.pipe(rename({ suffix: '.min' }))
     	.pipe(cleanCSS({compatibility: 'ie8'}))
-    	.pipe(gulp.dest('src/min'))
+    	.pipe(gulp.dest('min'))
     	.pipe(print(function(filepath) {
 	      return "file created : " + filepath;
 	    }))
 });
 
 gulp.task('myJs', function() {
-	return gulp.src('src/*.js')
+	return gulp.src('assets/*.js')
 		.pipe(sourcemaps.init())
  		.pipe(babel({
             presets: ['es2015']
@@ -46,7 +46,7 @@ gulp.task('myJs', function() {
 	         console.log(e);
 	    }))
 		.pipe(rename({ suffix: '.min' }))
-		.pipe(gulp.dest('src/min'))
+		.pipe(gulp.dest('min'))
 
 		.pipe(print(function(filepath) {
 	      return "file created : " + filepath;
