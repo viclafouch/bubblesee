@@ -3,7 +3,6 @@
 	padding: 3px 10px;
 	font-size: 0.815em;
 	color: #fff;
-
 	position: absolute;
 	top: 0; left: 0;
 	border-radius: 3px;
@@ -35,22 +34,39 @@
 		}
 	}
 
+	&.bubblesee__scale {
+		transform: scale(0);
+		transition-origin: 50% 100%;
+		transition: opacity 0.3s, transform 0.3s;
+
+		&.bubblesee__visible {
+			transform: scale(1);
+		}
+	}
+
 	&::after {
 		content: '';
 		position: absolute;
 		top: 100%;
 		left: 50%;
+		margin-left: -6px;
+
 		border-top: 6px solid #222;
+		border-bottom: 6px solid transparent;
 		border-right: 6px solid transparent;
 		border-left: 6px solid transparent;
-		margin-left: -6px; 
+	}
 
+	&.bubblesee__bottom::after {
+		top: auto!important;
+		bottom: 100%!important;
+
+		border-top-color: transparent;
+		border-bottom-color: #222;
 	}
 }
 
 a {
 	position: relative;
-	top: 300px;
-	left: 300px;
-	display: inline-block;
+	top: 100vh;
 }

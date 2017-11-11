@@ -20,8 +20,6 @@ class Bubblesee {
 			this.custom = custom;
 		}
 
-		console.log(this.custom)
-
 		let bubbleTarget = this.element.getAttribute('data-bubble');
     	
     	if (bubbleTarget) {
@@ -37,11 +35,15 @@ class Bubblesee {
 
 	mouseOver() {
 	    let bubblesee = this.createBubble();
-	    debugger;
 	    let width = bubblesee.offsetWidth;
 	    let height = bubblesee.offsetHeight;
 	    let left = this.element.offsetWidth / 2 - width / 2 + this.element.getBoundingClientRect().left + document.documentElement.scrollLeft;
-	    let top = this.element.getBoundingClientRect().top - height - 15 + document.documentElement.scrollTop;
+	    var top = this.element.getBoundingClientRect().top - height - 15 + document.documentElement.scrollTop;
+
+	    if (top < 50) {
+	    	top = this.element.getBoundingClientRect().top + height + 15 + document.documentElement.scrollTop;
+	    	bubblesee.classList.add('bubblesee__bottom');
+	    }
 	    bubblesee.style.left = left + "px";
 	    bubblesee.style.top = top + "px";
 	    bubblesee.classList.add('bubblesee__visible');
@@ -89,5 +91,3 @@ class Bubblesee {
 		return this.bubblesee;
   	}  
 }
-
-Bubblesee.bind('a[title]', 'rotate');
