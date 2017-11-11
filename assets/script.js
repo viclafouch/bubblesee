@@ -1,15 +1,26 @@
 class Bubblesee {
 	
-	static bind(selector, animation = null) {
+	static bind(selector, animation = null, custom = null) {
 		var bubbles = document.querySelectorAll(selector);
 		for (var i = bubbles.length - 1; i >= 0; i--) {
-			new Bubblesee(bubbles[i], animation);
+			new Bubblesee(bubbles[i], animation, custom);
 		}
 	}
 
-	constructor(element, animation) {
+	constructor(element, animation, custom) {
 		this.element = element;
-		this.animation = animation;
+
+		if (animation !== null) {
+			this.animation = animation.split(' ');
+		} else {
+			this.animation = animation;
+		}
+
+		if (custom) {
+			this.custom = custom;
+		}
+
+		console.log(this.custom)
 
 		let bubbleTarget = this.element.getAttribute('data-bubble');
     	
@@ -26,6 +37,7 @@ class Bubblesee {
 
 	mouseOver() {
 	    let bubblesee = this.createBubble();
+	    debugger;
 	    let width = bubblesee.offsetWidth;
 	    let height = bubblesee.offsetHeight;
 	    let left = this.element.offsetWidth / 2 - width / 2 + this.element.getBoundingClientRect().left + document.documentElement.scrollLeft;
@@ -40,13 +52,19 @@ class Bubblesee {
 	mouseOut() {
 		if (this.bubblesee !== null) {
 			this.bubblesee.classList.remove('bubblesee__visible');
-			this.bubblesee.addEventListener('transitionend', () => {
-				if (this.bubblesee !== null) {
-					this.element.setAttribute('title', this.title);
-					this.bubblesee.remove();
-					this.bubblesee = null;
-				}
-			});
+
+			var navigatorsProperties=['transitionend','OTransitionEnd','webkitTransitionEnd'];
+
+            for (var i in navigatorsProperties) {
+                this.bubblesee.addEventListener(navigatorsProperties[i], () => {
+					if (this.bubblesee !== null) {
+						this.element.setAttribute('title', this.title);
+						document.body.removeChild(this.bubblesee);
+						this.bubblesee = null;
+					}
+				});
+            }
+
 		}
 	}
 
@@ -59,7 +77,13 @@ class Bubblesee {
 			this.bubblesee = bubble;
 
 			if (this.animation !== null) {
-				bubble.classList.add('bubblesee__'+this.animation);
+				this.animation.forEach( function(element, index) {
+					bubble.classList.add('bubblesee__'+element);
+				});
+			}
+
+			if (this.custom) {
+				bubble.classList.add(this.custom);
 			}
 		}
 		return this.bubblesee;
