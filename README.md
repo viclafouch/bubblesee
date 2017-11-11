@@ -2,6 +2,8 @@
 
 A constructor for tooltip to your website.
 
+Demo available here : 
+
 ## Usage
 
 jQuery __is not necessary__ for this library
@@ -15,7 +17,7 @@ Include the Bubblesee's script and stylesheet to your page :
 Then, bind any element with a title attribute :
 
 ```js
-	Bubblesee.bind('element', 'animation', 'customClass');
+Bubblesee.bind('element[title]', 'animation', 'customClass');
 ```
 ## 3 Options
 * __element__:  Specifie a DOM element with an attribute title. __this param is compulsory__
@@ -31,7 +33,7 @@ Then, bind any element with a title attribute :
 ## Exemple 
 
 ```js
-	Bubblesee.bind('img[title]', 'scale', 'MyClass');
+Bubblesee.bind('img[title]', 'scale', 'MyClass');
 ```
 
 ## Contribute
