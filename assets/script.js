@@ -1,14 +1,16 @@
 class Bubblesee {
 	
-	static bind(selector) {
+	static bind(selector, animation = null) {
 		var bubbles = document.querySelectorAll(selector);
 		for (var i = bubbles.length - 1; i >= 0; i--) {
-			new Bubblesee(bubbles[i]);
+			new Bubblesee(bubbles[i], animation);
 		}
 	}
 
-	constructor(element) {
+	constructor(element, animation) {
 		this.element = element;
+		this.animation = animation;
+
 		let bubbleTarget = this.element.getAttribute('data-bubble');
     	
     	if (bubbleTarget) {
@@ -30,28 +32,38 @@ class Bubblesee {
 	    let top = this.element.getBoundingClientRect().top - height - 15 + document.documentElement.scrollTop;
 	    bubblesee.style.left = left + "px";
 	    bubblesee.style.top = top + "px";
-	    bubblesee.classList.add('visible');
+	    bubblesee.classList.add('bubblesee__visible');
 
-      this.element.setAttribute('title', '');
+      	this.element.setAttribute('title', '');
   	}
 
-	mouseOut () {
+	mouseOut() {
 		if (this.bubblesee !== null) {
-			this.bubblesee.classList.remove('visible');
-      this.element.setAttribute('title', this.title);
-      document.body.removeChild(this.bubblesee);
-      this.bubblesee = null;
+			this.bubblesee.classList.remove('bubblesee__visible');
+			this.bubblesee.addEventListener('transitionend', () => {
+				if (this.bubblesee !== null) {
+					this.element.setAttribute('title', this.title);
+					this.bubblesee.remove();
+					this.bubblesee = null;
+				}
+			});
 		}
 	}
 
-  createBubble () {
+  	createBubble() {
 		if (this.bubblesee === null) {
 			let bubble = document.createElement('div');
 			bubble.innerHTML = this.title;
-			bubble.classList.add('tippy');
+			bubble.classList.add('bubblesee');
 			document.body.appendChild(bubble);
 			this.bubblesee = bubble;
+
+			if (this.animation !== null) {
+				bubble.classList.add('bubblesee__'+this.animation);
+			}
 		}
-    return this.bubblesee;
-  }  
+		return this.bubblesee;
+  	}  
 }
+
+Bubblesee.bind('a[title]', 'rotate');

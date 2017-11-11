@@ -1,0 +1,60 @@
+.bubblesee {
+  background-color: #222;
+  padding: 3px 10px;
+  font-size: 0.815em;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 3px;
+  opacity: 0;
+}
+.bubblesee.bubblesee__visible {
+  opacity: 1;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+.bubblesee.bubblesee__toTop {
+  -webkit-transform: translateY(10px);
+          transform: translateY(10px);
+  -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+  transition: opacity 0.3s, -webkit-transform 0.3s;
+  transition: opacity 0.3s, transform 0.3s;
+  transition: opacity 0.3s, transform 0.3s, -webkit-transform 0.3s;
+}
+.bubblesee.bubblesee__toTop.bubblesee__visible {
+  -webkit-transform: translateY(0px);
+          transform: translateY(0px);
+}
+.bubblesee.bubblesee__rotate {
+  -webkit-transform: rotateX(90deg);
+          transform: rotateX(90deg);
+  border-radius: 100px 100px 3px 3px;
+  transition-origin: 50% 100%;
+  -webkit-transition: opacity 0.3s, border-radius 0.15s, -webkit-transform 0.3s;
+  transition: opacity 0.3s, border-radius 0.15s, -webkit-transform 0.3s;
+  transition: opacity 0.3s, transform 0.3s, border-radius 0.15s;
+  transition: opacity 0.3s, transform 0.3s, border-radius 0.15s, -webkit-transform 0.3s;
+}
+.bubblesee.bubblesee__rotate.bubblesee__visible {
+  border-radius: 3px;
+  -webkit-transform: rotateX(0deg);
+          transform: rotateX(0deg);
+}
+.bubblesee::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  border-top: 6px solid #222;
+  border-right: 6px solid transparent;
+  border-left: 6px solid transparent;
+  margin-left: -6px;
+}
+
+a {
+  position: relative;
+  top: 300px;
+  left: 300px;
+  display: inline-block;
+}

@@ -54,4 +54,10 @@ gulp.task('myJs', function() {
 });
 
 
-gulp.task('default', ['myJs', 'myCSS']);
+gulp.task('default', ['myJs', 'myCSS', 'watch']);
+
+// Watch task
+gulp.task('watch', function() {
+	gulp.watch('sass/*.scss', ['myCSS']);
+	gulp.watch('assets/*.js', ['myJs']);
+});
