@@ -28,7 +28,7 @@ Bubblesee.bind('element[title]', 'animation', 'customClass');
 
 * scale
 * rotate
-* fade
+* skew
 
 ## Exemple 
 

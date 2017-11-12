@@ -28,6 +28,8 @@ class Bubblesee {
       		this.title = element.getAttribute('title');
     	}
 
+    	this.whichTransitionEvent = this.whichTransitionEvent();
+
 	    this.bubblesee = null;
 	    this.element.addEventListener('mouseover', this.mouseOver.bind(this), false);
 	    this.element.addEventListener('mouseout', this.mouseOut.bind(this), false);
@@ -39,8 +41,7 @@ class Bubblesee {
 	    let height = bubblesee.offsetHeight;
 	    let left = this.element.offsetWidth / 2 - width / 2 + this.element.getBoundingClientRect().left + document.documentElement.scrollLeft;
 	    var top = this.element.getBoundingClientRect().top - height - 15 + document.documentElement.scrollTop;
-
-	    if (top < 50) {
+	    if (top < 20) {
 	    	top = this.element.getBoundingClientRect().top + height + 15 + document.documentElement.scrollTop;
 	    	bubblesee.classList.add('bubblesee__bottom');
 	    }
@@ -54,20 +55,35 @@ class Bubblesee {
 	mouseOut() {
 		if (this.bubblesee !== null) {
 			this.bubblesee.classList.remove('bubblesee__visible');
-
-			var navigatorsProperties=['transitionend','OTransitionEnd','webkitTransitionEnd'];
-
-            for (var i in navigatorsProperties) {
-                this.bubblesee.addEventListener(navigatorsProperties[i], () => {
-					if (this.bubblesee !== null) {
-						this.element.setAttribute('title', this.title);
-						document.body.removeChild(this.bubblesee);
-						this.bubblesee = null;
-					}
-				});
-            }
-
+ 			this.bubblesee.addEventListener(this.whichTransitionEvent, () => {
+				if (this.bubblesee !== null) {
+					this.element.setAttribute('title', this.title);
+					document.body.removeChild(this.bubblesee);
+					this.bubblesee = null;
+				}
+			});
 		}
+	}
+
+	whichTransitionEvent() {
+	  	var t, el = document.createElement("div");
+
+	  	var transitions = {
+			"transition"      : "transitionend",
+			"OTransition"     : "oTransitionEnd",
+			"MozTransition"   : "transitionend",
+			"WebkitTransition": "webkitTransitionEnd"
+	  	}
+
+	  	for (t in transitions){
+	    	if (el.style[t] !== undefined){
+	      		return transitions[t];
+	    	}
+	  	}
+	}
+
+	newId() {
+		return (new Date().getTime() + Math.floor((Math.random()*10000)+1)).toString(16);
 	}
 
   	createBubble() {
@@ -75,6 +91,8 @@ class Bubblesee {
 			let bubble = document.createElement('div');
 			bubble.innerHTML = this.title;
 			bubble.classList.add('bubblesee');
+			this.id = this.newId();
+			bubble.setAttribute('data-bubblesee', this.newId());
 			document.body.appendChild(bubble);
 			this.bubblesee = bubble;
 

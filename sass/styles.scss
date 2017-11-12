@@ -8,15 +8,16 @@
 	border-radius: 3px;
 	opacity: 0;
 	z-index: 9999999;
+	transition-duration: 0.3s;
+	transition-property: opacity;
 
 	&.bubblesee__visible {
 		opacity: 1;
-		transition: opacity 0.3s;
 	}
 
 	&.bubblesee__toTop {
 		transform: translateY(10px);
-		transition: opacity 0.3s, transform 0.3s;
+		transition-property: opacity, transform;
 
 		&.bubblesee__visible {
 			transform: translateY(0px);
@@ -26,8 +27,7 @@
 	&.bubblesee__rotate {
 		transform: rotateX(90deg);
 		border-radius: 100px 100px 3px 3px;
-		transition-origin: 50% 100%;
-		transition: opacity 0.3s, transform 0.3s, border-radius 0.15s;
+		transition-property: opacity, transform, border-radius;
 
 		&.bubblesee__visible {
 			border-radius: 3px;
@@ -36,12 +36,20 @@
 	}
 
 	&.bubblesee__scale {
-		transform: scale(0);
-		transition-origin: 50% 100%;
-		transition: opacity 0.3s, transform 0.3s;
+		transform: skew(50deg) scale(0);
+		transition-property: opacity, transform;
 
 		&.bubblesee__visible {
-			transform: scale(1);
+			transform: skew(0deg) scale(1);
+		}
+	}
+
+	&.bubblesee__skew {
+		transform: skewX(50deg);
+		transition-property: opacity, transform;
+
+		&.bubblesee__visible {
+			transform: skewX(0deg);
 		}
 	}
 
@@ -61,19 +69,7 @@
 	&.bubblesee__bottom::after {
 		top: auto!important;
 		bottom: 100%!important;
-
 		border-top-color: transparent;
 		border-bottom-color: #222;
 	}
-}
-
-div {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: flex-start;
-}
-
-a {
-	z-index: 30;
 }
