@@ -5,11 +5,17 @@
 	<meta charset="utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="min/styles.min.css">
+	<link rel="stylesheet" type="text/css" href="src/styles.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
 
 	<style type="text/css" media="all">
 
-		body { margin: 0; padding: 0; }
+		body { 
+			margin: 0; 
+			padding: 0; 
+			font-family: 'Open Sans', sans-serif;
+		}
 		
 		.container {
 			text-align: center;
@@ -20,23 +26,84 @@
 			margin: 0 auto;
 		}
 
-		img {
+		img.img_cover {
+			box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 			max-width: 100%;
 			text-align: center;
-		}	
+		}
+
+		a { color: #15C; }
+
+		button {
+			border: 0;
+			background-color:#d05f8f;;
+			border-radius: 6px;
+			color: #ffffff;
+			text-align: center;
+			cursor: pointer;
+			padding: 10px 19px;
+			font-weight: bold;
+		}
+
+		div.social {
+			display: block;
+			margin: 20px auto;
+		}
+
+		div.social a {
+			color:#fff;
+			background: #DB6E82;
+			border-radius:4px;
+			text-align:center;
+			text-decoration:none;
+			font-family:fontawesome;
+			position: relative;
+			display: inline-block;
+			width:40px;
+			height:28px;
+			padding-top:12px;
+			margin:0 2px;
+			-o-transition:all .5s;
+			-webkit-transition: all .5s;
+			-moz-transition: all .5s;
+			transition: all .5s;
+			-webkit-font-smoothing: antialiased;
+		}
+
+		div.social a:hover {
+		 	background: #ef92a3;
+		}
+
+		div.social a:nth-of-type(1):before {
+			content:'\f09a';
+		}
+		div.social a:nth-of-type(2):before {
+			content:'\f113';
+		}
+		div.social a:nth-of-type(3):before {
+			content:'\f1cb';
+		}
+
 	</style>
 </head>
 <body>
+	<a href="https://github.com/viclafouch/bubblesee" target="_blank"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
 	<div class="container">
 		<h1>Demo Bubblesee</h1>
 
 		<img src="https://mergy.org/wp-content/uploads/img100-940x529.jpg" title="scale" class="img_cover" alt="">
 
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis impedit atque, possimus deleniti, assumenda <a href="#" title="toTop">iusto accusamus</a> totam. Officia quo nam delectus, nihil cum rem reiciendis laboriosam magnam quas distinctio fuga.</p>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis impedit atque, possimus deleniti, assumenda <a href="#" title="toTop">hover me</a> totam. Officia quo nam delectus, nihil cum rem reiciendis laboriosam magnam quas distinctio fuga.</p>
 
-		<button title="default">Lorem Ipsum</button>
+		<button title="default">Hover me</button>
+
+		<div class="social">
+			<a href="https://twitter.com/VicAndTips" target="_blank" title="Twitter"></a>
+			<a href="https://github.com/viclafouch" target="_blank" title="Github"></a>
+			<a href="https://codepen.io/Viclafouch/" target="_blank" title="Codepen"></a>
+		</div>
 	</div>
-	<script src="min/script.min.js" type="text/javascript"></script>
+	<script src="src/script.min.js" type="text/javascript"></script>
 	<script>
 		Bubblesee.bind('img.img_cover[title]', 'skew');
 		Bubblesee.bind('a[title]', 'toTop');

@@ -8,6 +8,7 @@
 	border-radius: 3px;
 	opacity: 0;
 	z-index: 9999999;
+	-webkit-font-smoothing: antialiased;
 	transition-duration: 0.3s;
 	transition-property: opacity;
 

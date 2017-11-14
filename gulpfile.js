@@ -7,6 +7,7 @@ const gulp = require('gulp'),
 	sourcemaps = require('gulp-sourcemaps'),
 	babel = require('gulp-babel'),
 	concat = require('gulp-concat'),
+	browsers = require('browserslist'),
 	print = require('gulp-print'),
 	runSequence = require('run-sequence'),
 	imagemin = require('gulp-imagemin');
@@ -15,29 +16,25 @@ const gulp = require('gulp'),
 gulp.task('myCSS', function() {
 	return gulp.src(['sass/*.scss'])
 		.pipe(compass({
-		 	css: '',
-			sass: 'sass/',
-			config_file: './config.rb',
+		 	css: 'src',
+			sass: 'sass',
+			config_file: 'config.rb',
 		}))
-		.on('error', function(error) {
-	      console.log(error);
-	      this.emit('end');
-	    })
 	    .pipe(print(function(filepath) {
 	      return "file created : " + filepath;
 	    }))
-		.pipe(autoprefixer('last 2 version', 'safari 5', 'ie 7', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
+		.pipe(autoprefixer({
+            browsers: ['since 2013'],
+            cascade: false
+        }))
     	.pipe(gulp.dest(''))
     	.pipe(rename({ suffix: '.min' }))
     	.pipe(cleanCSS({compatibility: 'ie8'}))
-    	.pipe(gulp.dest('min'))
-    	.pipe(print(function(filepath) {
-	      return "file created : " + filepath;
-	    }))
+    	.pipe(gulp.dest('src'));	
 });
 
 gulp.task('myJs', function() {
-	return gulp.src('assets/*.js')
+	return gulp.src('src/script.js')
 		.pipe(sourcemaps.init())
  		.pipe(babel({
             presets: ['es2015']
@@ -46,7 +43,7 @@ gulp.task('myJs', function() {
 	         console.log(e);
 	    }))
 		.pipe(rename({ suffix: '.min' }))
-		.pipe(gulp.dest('min'))
+		.pipe(gulp.dest('src'))
 
 		.pipe(print(function(filepath) {
 	      return "file created : " + filepath;
@@ -59,5 +56,5 @@ gulp.task('default', ['myJs', 'myCSS', 'watch']);
 // Watch task
 gulp.task('watch', function() {
 	gulp.watch('sass/*.scss', ['myCSS']);
-	gulp.watch('assets/*.js', ['myJs']);
+	gulp.watch('src/script.js', ['myJs']);
 });

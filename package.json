@@ -19,8 +19,8 @@
     "url": "https://github.com/viclafouch/bubblesee/issues"
   },
   "homepage": "https://github.com/viclafouch/bubblesee#readme",
-
   "devDependencies": {
+    "browserslist": "^2.9.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-babel": "^6.1.2",
