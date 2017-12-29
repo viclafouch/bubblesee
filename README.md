@@ -11,7 +11,7 @@ Include the Bubblesee's script and stylesheet to your page :
 
 ```html
 <link rel="stylesheet" href="css/bubblesee.min.css" />
-<script src=js/bubblesee.min.js"></script>
+<script src="js/bubblesee.min.js"></script>
 ```
 
 Then, bind any element with a title attribute :
