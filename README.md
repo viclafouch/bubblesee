@@ -2,7 +2,7 @@
 
 A constructor for tooltip to your website.
 
-Demo available here : https://www.victor-de-la-fouchardiere.fr/bubblesee/demo.html
+Demo available here : https://viclafouch.github.io/bubblesee/demo.html
 
 ## Usage
 
